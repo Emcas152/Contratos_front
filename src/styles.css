@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: #035C67;
+}
+.mat-radio-group.mat-accent .mat-radio-button .mat-radio-outer-circle {
+    border-color: #035C67;
+  }
+
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #035C67;
+}
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: #035C67;
+    color: white;
+}
+.mat-radio-button .mat-radio-outer-circle, 
+.mat-radio-button .mat-radio-inner-circle {
+  display: none;
+}
+.visible .mat-radio-button .mat-radio-outer-circle, 
+.visible .mat-radio-button .mat-radio-inner-circle {
+  display: block;
+}
+
+.mat-checkbox-checked .mat-checkbox-background {
+  background-color: #98989a !important;
+}
+.form-check-input:checked {
+  background-color: #035C67;
+}
+.mat-spinner-color {
+  color: red;
+}

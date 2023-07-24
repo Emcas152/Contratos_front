@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+   apiUrl: 'https://lifebackend.swarmdesarrollo.com/api',
+  baseUrl: 'https://lifebackend.swarmdesarrollo.com'   
+   /*  apiUrl: 'http://localhost/life-backend/public/api',
+   baseUrl: 'http://localhost/life-backend'   */
 };
 
 /*
