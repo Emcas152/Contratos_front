@@ -329,3 +329,117 @@ button[disabled] {
     margin-bottom: 8px;
   }
 }
+
+.radio-image-group label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.radio-image-group img {
+  width: 100px; /* Ajusta el tamaño según tu diseño */
+  height: auto;
+  cursor: pointer;
+}
+
+.descripcion {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.table-container {
+  margin-top: 10px;
+}
+
+.tables {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tables td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+.radio-image-table-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.options-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre opciones */
+}
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra las imágenes y tablas horizontalmente */
+  text-align: center; /* Centra el texto debajo de las imágenes */
+}
+
+.radio-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra la imagen y el texto */
+  margin-bottom: 20px; /* Espacio debajo de cada opción */
+  width: 200px; /* Ancho máximo para cada opción */
+}
+
+.option-image {
+  width: 100px; /* Tamaño pequeño de la imagen */
+  height: 100px;
+  margin-bottom: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.option-label {
+  font-weight: bold;
+}
+
+.option-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra la tabla debajo de la opción */
+}
+
+
+.descripcion {
+  font-size: 14px;
+  color: #666;
+  margin: 10px 0; /* Espacio alrededor de la descripción */
+}
+
+.tables {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tables td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.custom-radio-button {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  padding: 0;
+}
+
+.custom-radio-button .mat-radio-outer-circle,
+.custom-radio-button .mat-radio-inner-circle {
+  display: none; /* Oculta el círculo del radio button */
+}
+
+.radio-button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.radio-button-content img {
+  width: 100px; /* Ajusta el tamaño según tus necesidades */
+  height: auto;
+}
