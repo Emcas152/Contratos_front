@@ -61,6 +61,13 @@
     margin: 0 16px;
   }
 
+
+  .info-text {
+  font-size: 10px;
+  color: #666;
+  margin-top: 10px;
+}
+
   .toolbar #twitter-logo:hover,
   .toolbar #youtube-logo:hover {
     opacity: 0.8;
@@ -345,10 +352,15 @@
                   <span>Barrio Don Bosco</span>
                 </mat-radio-button> -->
 
-              <!--   <mat-radio-button value="VIVO 13" style="margin-right: 20px;"> 
-                  <img src="./../assets/VIVO ZONA 13.jpg" alt="Image Radio Button" width="200" height="200">
-                  <span>Vivo Zona 13</span>
-                </mat-radio-button> -->
+               <mat-radio-button value="VILLA LUZ" style="margin-right: 20px;"> 
+                  <img src="./../assets/villa1.jpg" alt="Image Radio Button" width="200" height="200">
+                  <span>Villa Luz</span>
+                </mat-radio-button> 
+
+                <mat-radio-button value="GEMINIS 10" style="margin-right: 20px;"> 
+                  <img src="./../assets/geminis2.jpg" alt="Image Radio Button" width="200" height="200">
+                  <span>Geminis 10 </span>
+                </mat-radio-button> 
 
                 <mat-radio-button value="VIVO 4" style="margin-right: 20px;">
                   <img src="./../assets/VIVO ZONA 4.jpg" alt="Image Radio Button" width="200" height="200">
@@ -396,7 +408,7 @@
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="col centered-select">
-                <input matInput placeholder="Escriba No. Apartamento" formControlName="numero_apartamento">
+                <input matInput placeholder="No. Apartamento u Oficina" formControlName="numero_apartamento">
               </mat-form-field>
               
               <div class="d-flex justify-content-between">
@@ -413,7 +425,7 @@
           </mat-step>
 
           
-          <mat-step [stepControl]="thirdFormGroup" errorMessage="Elige una opción"><!-- 
+          <mat-step [stepControl]="thirdFormGroup" *ngIf="isBuildingSelected()" errorMessage="Elige una opción"><!-- 
             <ng-template matStepLabel>Tipo de Contratante</ng-template> -->
             <form [formGroup]="thirdFormGroup">
             <h3>
@@ -491,7 +503,7 @@
           </mat-step>
 
 
-          <mat-step [stepControl]="fourthFormGroup">
+          <mat-step [stepControl]="fourthFormGroup"   *ngIf="isContractTypeSelected()" [completed]="isServiceSelected()">
             <form [formGroup]="fourthFormGroup">
               <h3>
                 ¿ Qué servicios necesitas ?
@@ -512,7 +524,7 @@
                     <span>Telecomunicaciones</span>
                   </div>
                 </mat-checkbox>
-                <div *ngIf="selectedValue !== 'VIAGGIO' && selectedTipo !== 'RENTA'">
+                <div *ngIf="selectedValue !== 'VIAGGIO' && selectedTipo !== 'RENTA' && selectedValue !== 'VILLA LUZ'">
                   <mat-checkbox labelPosition="after" class="center-radio-group" formControlName="agua">
                     <div class="checkbox-content">
                       <img src="./../assets/ICONO AGUA.png" alt="Imagen del checkbox" width="100" height="100">
@@ -537,205 +549,167 @@
           <mat-step [stepControl]="formServicio" *ngIf="fourthFormGroup?.get('internet')?.value">
             <ng-template matStepLabel></ng-template>
             <form [formGroup]="formServicio" >
-              <ng-template matStepLabel>Datos del Contratante</ng-template>
-              
-                <div class="columna">
-                  <h3>
-                    Elige un plan de telecomunicación 
-                  </h3>
-                 
-                </div>
-                <div class="separador"></div>
-              
-              <div class="row">
-                <div class="columna">
-                  <mat-radio-group  class="visible" formControlName="tipo_servicio">
-    
-                    <mat-radio-button class="mr-1" matTooltip="Simétrico:
-                    Si usted adquiere un plan de 30 Mg, tendra 30 Mg para la descarga(bajada de datos)
-                    y 30 Mg de carga(subida de datos)"  value="simetrico">Simétrico</mat-radio-button> 
-                    <button mat-icon-button 
-                      matTooltip="Simétrico:
-                      Si usted adquiere un plan de 30 Mg, tendra 30 Mg para la descarga(bajada de datos)
-                    y 30 Mg de carga(subida de datos)" 
-                      aria-label="Example icon button with a vertical three dot icon">
-                      <mat-icon>info</mat-icon>
-                    </button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <mat-radio-button matTooltip="FTTH Plus:
-                    Si usted adquiere un plan de 30 Mg, tendra 
-                    30 Mg para la descarga(bajada de datos) y 30% en la
-                    carga(subida de datos)."
-                     value="burst">FTTH Plus</mat-radio-button> 
-                    <button mat-icon-button 
-                      matTooltip="FTTH Plus:
-                      Si usted adquiere un plan de 30 Mg, tendra 
-                      30 Mg para la descarga(bajada de datos) y 30% en la
-                      carga(subida de datos).">
-                      <mat-icon>info</mat-icon>
-                    </button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <mat-radio-button class="mr-1" matTooltip="Básico:
-                    Si usted adquiere un plan de 30 Mg, tendra 30 Mg para la descarga(bajada de datos)
-                    y 10% en la carga(subida de datos)"  value="basico">Básico</mat-radio-button> 
-                    <button mat-icon-button
-                      matTooltip="Básico:
-                      Si usted adquiere un plan de 30 Mg, tendra 30 Mg para la descarga(bajada de datos)
-                      y 10% en la carga(subida de datos)" 
-                      aria-label="Example icon button with a vertical three dot icon">
-                      <mat-icon>info</mat-icon>
-                    </button>
-                  </mat-radio-group>
-                </div>
+              <ng-template matStepLabel></ng-template>
+              <div class="columna">
+                <h3>Elige un plan de telecomunicación</h3>
               </div>
-              <div class="row">
-                
-                <div class="columna" *ngIf="this.formServicio.get('tipo_servicio')?.value == 'simetrico'">
-                  <table class="table">
-                    <tr>
-                      <td colspan="3" class="same-speed-cell">
-                        <img src="./../assets/SIMÉTRICO.svg" alt="Imagen del checkbox" width="100" height="100">
-                      </td>
-                    </tr>
-                    <mat-radio-group  class="visible" formControlName="tabla1">
-                    <!-- <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="10"></mat-radio-button>
-                      </td>
-                      <td>10 Mbps</td>
-                      <td>Q. 239.00</td>
-                    </tr> -->
-                    <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="20"></mat-radio-button>
-                      </td>
-                      <td>20 Mbps</td>
-                      <td>$. 90.00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="30"></mat-radio-button>
-                      </td>
-                      <td>30 Mbps</td>
-                      <td>$. 110.00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="50"></mat-radio-button>
-                      </td>
-                      <td>50 Mbps</td>
-                      <td>$. 130.00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="100"></mat-radio-button>
-                      </td>
-                      <td>100 Mbps</td>
-                      <td>$. 250.00</td>
-                    </tr>
-                    </mat-radio-group>
-                  </table>
-                </div>
-                <div class="columna" *ngIf="this.formServicio.get('tipo_servicio')?.value == 'burst'">
-                  <table class="table">
-                    <tr>
-                      <td colspan="3" class="same-speed-cell">
-                        <img src="./../assets/FTTH PLUS.svg" alt="Imagen del checkbox" width="100" height="100">
-                      </td>
-                    </tr>
-                    <mat-radio-group  class="visible" formControlName="tabla2">
-                      <!-- <tr>
-                        <td>
-                          <mat-radio-button class="mr-1" value="20"></mat-radio-button>
-                        </td>
-                        <td>20 Mbps</td>
-                        <td>Q. 299.00</td>
-                      </tr> -->
-                      <tr>
-                        <td>
-                          <mat-radio-button class="mr-1" value="30"></mat-radio-button>
-                        </td>
-                        <td>30 Mbps</td>
-                        <td>Q. 299.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <mat-radio-button class="mr-1" value="50"></mat-radio-button>
-                        </td>
-                        <td>50 Mbps</td>
-                        <td>Q. 349.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <mat-radio-button class="mr-1" value="100"></mat-radio-button>
-                        </td>
-                        <td>100 Mbps</td>
-                        <td>Q. 429.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <mat-radio-button class="mr-1" value="200"></mat-radio-button>
-                        </td>
-                        <td>200 Mbps</td>
-                        <td>Q. 599.00</td>
-                      </tr>
+              <mat-radio-group formControlName="tipo_servicio" class="visible">
+                <div class="options-container">
+                  <!-- Opción Simétrico -->
+                  <div class="option">
+                    <mat-radio-button value="simetrico" class="radio-option"  [disabled]="true">
+                      <img src="../assets/SIMÉTRICO.svg" alt="Simétrico" class="option-image"/>
+                      <div class="option-label">Simétrico</div>
+                    </mat-radio-button>
+                    <table class="table">
+                      <mat-radio-group formControlName="tabla1" class="visible" >
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="20"  (change)="onRadioGroupChange('simetrico','20','tabla1')"></mat-radio-button>
+                          </td>
+                          <td>20 Mbps</td>
+                          <td>$. 90.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="30" (change)="onRadioGroupChange('simetrico','30','tabla1')"></mat-radio-button>
+                          </td>
+                          <td>30 Mbps</td>
+                          <td>$. 110.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="50" (change)="onRadioGroupChange('simetrico','50','tabla1')"></mat-radio-button>
+                          </td>
+                          <td>50 Mbps</td>
+                          <td>$. 130.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="100"  (change)="onRadioGroupChange('simetrico','100','tabla1')"></mat-radio-button>
+                          </td>
+                          <td>100 Mbps</td>
+                          <td>$. 250.00</td>
+                        </tr>
                       </mat-radio-group>
-                  </table>
+                    </table>
+                    <p class="info-text">Ejemplo: Al adquirir un plan de 30 MB,<br>
+                       tendrás la misma cantidad<br>tanto para la descarga <br>
+                       como para la carga de datos.</p>
+                  </div>
+                  <!-- Opción FTTH PLUS -->
+                  <div class="option">
+                    <mat-radio-button value="burst" class="radio-option"  [disabled]="true">
+                      <img src="../assets/FTTH PLUS.svg" alt="FTTH PLUS" class="option-image"/>
+                      <div class="option-label">FTTH PLUS</div>
+                    </mat-radio-button>
+                    <table class="table">
+                      <mat-radio-group formControlName="tabla2" class="visible" >
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="30"  (change)="onRadioGroupChange('burst','30','tabla2')"></mat-radio-button>
+                          </td>
+                          <td>30 Mbps</td>
+                          <td>Q. 299.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="50" (change)="onRadioGroupChange('burst','50','tabla2')"></mat-radio-button>
+                          </td>
+                          <td>50 Mbps</td>
+                          <td>Q. 349.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="100" (change)="onRadioGroupChange('burst','100','tabla2')"></mat-radio-button>
+                          </td>
+                          <td>100 Mbps</td>
+                          <td>Q. 429.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="200" (change)="onRadioGroupChange('burst','200','tabla2')" ></mat-radio-button>
+                          </td>
+                          <td>200 Mbps</td>
+                          <td>Q. 599.00</td>
+                        </tr>
+                      </mat-radio-group>
+                    </table>
+                    <p class="info-text">*Ejemplo: Al adquirir<br> un plan de 30 MB<br>
+                      , tendrás 30 MB para la descarga<br>
+                      y un 30% en la carga.</p>
+                  </div>
+                  <!-- Opción Básico -->
+                  <div class="option">
+                    <mat-radio-button value="basico" class="radio-option" [disabled]="true" >
+                      <img src="../assets/BÁSICO.svg" alt="Básico" class="option-image"/>
+                      <div class="option-label">Básico</div>
+                    </mat-radio-button>
+                    <table class="table">
+                      <mat-radio-group formControlName="tabla0" class="visible" >
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="30" (change)="onRadioGroupChange('basico','30','tabla0')"></mat-radio-button>
+                          </td>
+                          <td>50 Mbps</td>
+                          <td>Q. 199.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="50" (change)="onRadioGroupChange('basico','50','tabla0')"></mat-radio-button>
+                          </td>
+                          <td>75 Mbps</td>
+                          <td>Q. 249.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="100" (change)="onRadioGroupChange('basico','100','tabla0')"></mat-radio-button>
+                          </td>
+                          <td>150 Mbps</td>
+                          <td>Q. 329.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <mat-radio-button class="mr-1" value="200" (change)="onRadioGroupChange('basico','200','tabla0')"></mat-radio-button>
+                          </td>
+                          <td>250 Mbps</td>
+                          <td>Q. 529.00</td>
+                        </tr>
+                      </mat-radio-group>
+                    </table>
+                    <p class="info-text">*Ejemplo: Al adquirir un plan<br>
+                      de 50 MB, tendrás 50 MB para la<br>
+                      descarga y un 10% en la carga.</p>
+                   
+                  </div>
                 </div>
-                <div class="columna" *ngIf="this.formServicio.get('tipo_servicio')?.value == 'basico'">
-                  <table class="table">
-                    <tr>
-                      <td colspan="3" class="same-speed-cell">
-                        <img src="./../assets/BÁSICO.svg" alt="Imagen del checkbox" width="100" height="100">
-                      </td>
-                      <div class="separador"></div>
-                    </tr>
-                    <mat-radio-group  class="visible" formControlName="tabla0">
-                    <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="30"></mat-radio-button>
-                      </td>
-                      <td>30 Mbps</td>
-                      <td>Q. 199.00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="50"></mat-radio-button>
-                      </td>
-                      <td>50 Mbps</td>
-                      <td>Q. 249.00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="100"></mat-radio-button>
-                      </td>
-                      <td>100 Mbps</td>
-                      <td>Q. 329.00</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="200"></mat-radio-button>
-                      </td>
-                      <td>200 Mbps</td>
-                      <td>Q. 499.00</td>
-                    </tr>
-                    </mat-radio-group>
-                  </table>
-                </div>
-              </div>
+              </mat-radio-group>
+              
+              
+              
+              
+                <div class="separador"></div>
+            
+          
               <div class="separador"></div>
               <div class="separador"></div>
               <div class="separador"></div>
               
               
               <div class="d-flex flex-column justify-content-center align-items-baseline facturacion-title">
-                <mat-checkbox [(ngModel)]="agregarServicioTelefono" formControlName="deseaAgregarTelefono" class="align-self-start" style="text-align: left;">¿Desea agregar servicio de telefonía?</mat-checkbox>
+            
               </div>
 
 
-
+              <h3>¿Desea agregar servicio de telefonía?</h3>
               <div class="separador"></div>
-              <div class="columna" *ngIf="this.formServicio.get('deseaAgregarTelefono')?.value">
+              <div class="columna">
+                <div style="text-align: center;">
+                  <img src="./../assets/ICONO TELEFONIA.png" alt="Imagen de teléfono" width="150" height="150"> <!-- Aquí agregas la URL de la imagen -->
+                </div>
+              </div>
+
+              <div class="columna" >
                 <div style="display: flex; flex-direction: column; align-items: center;">
                   <div style="text-align: center;">
                     <table class="table">
@@ -759,11 +733,12 @@
                         </tr>
                       </mat-radio-group>
                     </table>
+                   
                   </div>
                   <div class="separador"></div>
                   <div style="text-align: center;">
-                    <p style="font-size: 18px; font-weight: bold; color: #035C67;"> * El servicio de instalación del aparato de telefonía tiene un costo extra de Q. 299.00</p>
-                    <p style="font-size: 18px; font-weight: bold; color: #035C67;"> * El minuto adicional local tiene un costo extra de Q. 0.49 </p>
+                    <p style="font-size: 18px; font-weight: bold; color: #035C67;"> - Hay un cargo adicional de Q. 299.00 por el servicio de instalación del equipo de telefonía.</p>
+                    <p style="font-size: 18px; font-weight: bold; color: #035C67;"> - El minuto adicional local tiene un costo extra de Q. 0.49 </p>
                   </div>
                 </div>
               </div>
@@ -783,167 +758,186 @@
              
             </form>
           </mat-step>
+          <!-- empieza el nuevo  -->
+
           
-          <!-- aqui empieza el agua -->
-          <mat-step [stepControl]="formServicioAgua" *ngIf="fourthFormGroup?.get('agua')?.value">
-            <ng-template matStepLabel></ng-template>
-            <form [formGroup]="formServicioAgua" >
-              <ng-template matStepLabel>Datos del Contratante</ng-template>
-              <div class="separador"></div>
+          <div class="options-container">
+            <!-- Opción Por Consumo -->
+            <div class="option">
+              <mat-radio-button value="simetrico" class="radio-option">
+                <img src="../assets/SIMÉTRICO.svg" alt="Por Consumo" class="option-image"/>
+                <div class="option-label">Simetrico</div>
+              </mat-radio-button>
               
-                <div class="columna">
-                  <h3>
-                    Elige una opción
-                  </h3>
-                 
-                </div>
-                <div class="separador"></div>
-              
-              <div class="row">
-                <div class="columna">
-                  <mat-radio-group  class="visible" formControlName="servicio_agua">
-    
-                    <mat-radio-button class="mr-1" matTooltip="No incluye metros cubicos"  value="opcion1">Por Consumo</mat-radio-button> 
-                   <!--  <button mat-icon-button 
-                      matTooltip="Simétrico:
-                      Si usted adquiere un plan de 30 Mg, tendra 30 Mg para la descarga(bajada de datos)
-                    y 30 Mg de carga(subida de datos)" 
-                      aria-label="Example icon button with a vertical three dot icon">
-                      <mat-icon>info</mat-icon>
-                    </button> -->
-                 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <mat-radio-button class="mr-1" matTooltip="Incluye 30 metros cubicos "  value="opcion2">Media paja de Agua</mat-radio-button> 
-                   <!--  <button mat-icon-button
-                      matTooltip="Básico:
-                      Si usted adquiere un plan de 30 Mg, tendra 30 Mg para la descarga(bajada de datos)
-                      y 10% en la carga(subida de datos)" 
-                      aria-label="Example icon button with a vertical three dot icon">
-                      <mat-icon>info</mat-icon>
-                    </button> -->
-                  </mat-radio-group>
-                </div>
-              </div>
-              <div class="separador"></div>
-              
-              <div class="row">
+              <table class="table">
                 
-                <div class="columna" *ngIf="this.formServicioAgua.get('servicio_agua')?.value == 'opcion1'">
-                  <table class="table">
-                  
-                   
-                    <!-- <tr>
-                      <td>
-                        <mat-radio-button class="mr-1" value="10"></mat-radio-button>
-                      </td>
-                      <td>10 Mbps</td>
-                      <td>Q. 239.00</td>
-                    </tr> -->
-                    <tr>
-                      <td>
-                       
-                      </td>
-                      <td style="font-weight: bold; color: #035C67;">Cargo Fijo: </td>
-                      <td>Q. 50.00</td>
-                    </tr>
-
-
-                    <tr>
-                      <td>
-                       
-                      </td>
-                      <td style="font-weight: bold; color: #035C67;"> mt<sup>3</sup> Incluidos: </td>
-                      <td> 0 mt<sup>3</sup> mensuales</td>
-                    </tr>
-                   
-                    <tr>
-                      <td>
-                     
-                      </td>
-                      <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> por consumo: </td>
-                      <td>  Q. 7.50</td>
-                    </tr>
-                  
-                   
-                 
-                  </table>
-                 
-                </div>
-
-
-
-
-                <div class="columna" *ngIf="this.formServicioAgua.get('servicio_agua')?.value == 'opcion2'">
-                  <table class="table">
-                   
-                      <!-- <tr>
-                        <td>
-                          <mat-radio-button class="mr-1" value="20"></mat-radio-button>
-                        </td>
-                        <td>20 Mbps</td>
-                        <td>Q. 299.00</td>
-                      </tr> -->
-                      <tr>
-                        <td>
-                         
-                        </td>
-                        <td style="font-weight: bold; color: #035C67;">Cargo Fijo: </td>
-                        <td>Q. 150.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                         
-                        </td>
-                        <td style="font-weight: bold; color: #035C67;"> mt<sup>3</sup> Incluidos: </td>
-                        <td> 30  mt<sup>3</sup> mensuales </td>
-                      </tr>
-                     
-                      <tr>
-                        <td>
-                       
-                        </td>
-                        <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> por consumo: </td>
-                        <td>  Q. 11.50</td>
-                      </tr>
-                  </table>
-                </div>
+              <mat-radio-group  class="visible" formControlName="tabla1">
+                <!-- <tr>
+                  <td>
+                    <mat-radio-button class="mr-1" value="10"></mat-radio-button>
+                  </td>
+                  <td>10 Mbps</td>
+                  <td>Q. 239.00</td>
+                </tr> -->
+                <tr>
+                  <td>
+                    <mat-radio-button class="mr-1" value="20"></mat-radio-button>
+                  </td>
+                  <td>20 Mbps</td>
+                  <td>$. 90.00</td>
+                </tr>
+                <tr>
+                  <td>
+                    <mat-radio-button class="mr-1" value="30"></mat-radio-button>
+                  </td>
+                  <td>30 Mbps</td>
+                  <td>$. 110.00</td>
+                </tr>
+                <tr>
+                  <td>
+                    <mat-radio-button class="mr-1" value="50"></mat-radio-button>
+                  </td>
+                  <td>50 Mbps</td>
+                  <td>$. 130.00</td>
+                </tr>
+                <tr>
+                  <td>
+                    <mat-radio-button class="mr-1" value="100"></mat-radio-button>
+                  </td>
+                  <td>100 Mbps</td>
+                  <td>$. 250.00</td>
+                </tr>
+                </mat-radio-group>
+              </table>
               
-              </div>
-              <div class="separador"></div>
-              
-              <div class="separador"></div>
-              <div class="d-flex justify-content-between">
-                <button class="mat-stroked-button"  style="margin-right: 20px;" mat-button matStepperPrevious>
-                  <mat-icon>keyboard_arrow_left</mat-icon>
-                  Volver
-                </button>
-                <button mat-button matStepperNext class="align-self-end float-right mat-stroked-button">
-                  <mat-icon>keyboard_arrow_right</mat-icon>
-                  Siguiente
-                </button>
-              </div>
+            </div>
+      
+            <!-- Opción Media Paja de Agua -->
+            <div class="option">
+              <mat-radio-button value="opcion2" class="radio-option">
+                <img src="../assets/ICONO AGUA CONSUMO.png" alt="Media Paja de Agua" class="option-image"/>
+                <div class="option-label">Media Paja de Agua</div>
+              </mat-radio-button>
              
-            </form>
-          </mat-step>
+                <table class="tables">
+                  <tr>
+                    <td></td>
+                    <td style="font-weight: bold; color: #035C67;">Cargo Fijo:</td>
+                    <td>Q. 150.00</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> Incluidos:</td>
+                    <td>30 mt<sup>3</sup> mensuales</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> por consumo:</td>
+                    <td>Q. 11.50</td>
+                  </tr>
+                </table>
+              
+            </div>
+          </div>
+
+
+
+          <!-- aqui empieza el agua -->
+       <mat-step [stepControl]="formServicioAgua" *ngIf="fourthFormGroup?.get('agua')?.value">
+  <ng-template matStepLabel></ng-template>
+  <form [formGroup]="formServicioAgua">
+    <div class="separador"></div>
+    <div class="row">
+      <div class="columna">
+        <h3>Elige un plan para transporte de agua residencial </h3>
+        <br>
+        
+      </div>
+      
+
+    </div>
+    <div class="separador"></div>
+
+    <mat-radio-group class="visible" formControlName="servicio_agua">
+      <div class="options-container">
+        <!-- Opción Por Consumo -->
+        <div class="option">
+          <mat-radio-button value="opcion1" class="radio-option">
+            <img src="../assets/ICONO AGUA CONSUMO.png" alt="Por Consumo" class="option-image"/>
+            <div class="option-label">Por Consumo</div>
+          </mat-radio-button>
+
+          <table class="tables">
+            <tr>
+              
+              <td style="font-weight: bold; color: #035C67;">Cargo Fijo:</td>
+              <td>Q. 50.00</td>
+            </tr>
+            <tr>
+              
+              <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> Incluidos:</td>
+              <td>0 mt<sup>3</sup> mensuales</td>
+            </tr>
+            <tr>
+             
+              <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> por consumo:</td>
+              <td>Q. 7.50</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Opción Media Paja de Agua -->
+        <div class="option">
+          <mat-radio-button value="opcion2" class="radio-option">
+            <img src="../assets/ICONO AGUA CONSUMO.png" alt="Media Paja de Agua" class="option-image"/>
+            <div class="option-label">Media Paja de Agua</div>
+          </mat-radio-button>
+
+          <table class="tables">
+            <tr>
+              
+              <td style="font-weight: bold; color: #035C67;">Cargo Fijo:</td>
+              <td>Q. 150.00</td>
+            </tr>
+            <tr>
+              
+              <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> Incluidos:</td>
+              <td>30 mt<sup>3</sup> mensuales</td>
+            </tr>
+            <tr>
+              
+              <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> por consumo:</td>
+              <td>Q. 11.50</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </mat-radio-group>
+
+    <div class="separador"></div>
+
+    <div class="d-flex justify-content-between">
+      <button class="mat-stroked-button" style="margin-right: 20px;" mat-button matStepperPrevious>
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        Volver
+      </button>
+      <button mat-button matStepperNext class="align-self-end float-right mat-stroked-button">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        Siguiente
+      </button>
+    </div>
+  </form>
+</mat-step>
+
+          
 
           <!-- aquiterminaelagua -->
 
 
 
-
-
-
-
-
-
-
-
-
-
-
           <div class="row">
             <div class="col">
-              <mat-step [stepControl]="formSolicitante" [completed]="isSolicitanteFormCompleted()">
+              <mat-step [stepControl]="formSolicitante" *ngIf="isServiceSelected()">
             <form [formGroup]="formSolicitante">
               <ng-template matStepLabel></ng-template>
               <h3 class="facturacion-title">Datos del Solicitante</h3>
@@ -1030,7 +1024,7 @@
 
                 
               </div>
-              <ng-container *ngIf="formSolicitante.get('incluir_facturacion')?.value">
+              <ng-container >
                 <h3 class="facturacion-title">Datos de facturación</h3>
                 <form [formGroup]="formFacturacion">
                   <div class="row">
@@ -1045,12 +1039,7 @@
                 </form>
               </ng-container>
               <div class="d-flex justify-content-between">
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" formControlName="incluir_facturacion" id="incluir_facturacion">
-
-                  <label class="form-check-label" for="incluir_facturacion">¿Incluir datos de facturación?</label>
-
-                </div>
+          
                 <div class="separador"></div>
                 <button class="mat-stroked-button" style="margin-right: 20px;" mat-button matStepperPrevious>
                   <mat-icon>keyboard_arrow_left</mat-icon>
@@ -1078,9 +1067,14 @@
             <div style="text-align: center;">
               <ul style="list-style-type: disc; text-align: left;">
                 <li>El contrato deberá ser firmado con <strong style="color: #035C67;">lapicero azul.</strong></li>
-                <li>Realizar un deposito de por el contador de energía eléctrica, a la cuenta Monetaria del Banco 
-                    Industrial <strong style="color: #035C67;">NO. 824-000676-0</strong> por el cual se extenderá un recibo.</li>
-                <li>Enviar una copia del contrato firmado y de la boleta de deposito al correo <strong style="color: #035C67;">ventas@onit.gt</strong></li>
+                <li>Enviar una copia del contrato firmado al correo <strong style="color: #035C67;">ventas@onit.gt</strong></li>
+               <div *ngIf="showEnergyInfo">
+      <ul style="list-style-type: disc; text-align: left;">
+        <li>Para activar su servicio de energía eléctrica, es necesario efectuar un depósito de Q400 destinado a la instalación del contador correspondiente. El pago debe realizarse mediante transferencia a la cuenta Monetaria del Banco Industrial <strong style="color: #035C67;">NO. 824-000676-0</strong> a nombre de <strong style="color: #035C67;">Hogares Inteligentes S.A.</strong> Posteriormente, se le entregará un recibo como confirmación una vez completada la transacción.</li>
+        <li>Enviar una copia del contrato firmado y de la boleta de deposito al correo <strong style="color: #035C67;">ventas@onit.gt</strong></li>
+      </ul>
+    </div>
+                
               </ul>
             </div>
             <div class="separador"></div>
@@ -1105,9 +1099,13 @@
             <div style="text-align: center;">
               <ul style="list-style-type: disc; text-align: left;">
                 <li>El contrato deberá ser firmado con <strong style="color: #035C67;">lapicero azul.</strong></li>
-                <li>Realizar un deposito de por el contador de energía eléctrica, a la cuenta Monetaria del Banco 
-                    Industrial <strong style="color: #035C67;">NO. 824-000676-0</strong> por el cual se extenderá un recibo.</li>
-                <li>Enviar una copia del contrato firmado y de la boleta de deposito al correo <strong style="color: #035C67;">ventas@onit.gt</strong></li>
+                <li>Enviar una copia del contrato firmado al correo <strong style="color: #035C67;">ventas@onit.gt</strong></li>
+                <div *ngIf="showEnergyInfo">
+                  <ul style="list-style-type: disc; text-align: left;">
+                    <li>Para activar su servicio de energía eléctrica, es necesario efectuar un depósito de Q400 destinado a la instalación del contador correspondiente. El pago debe realizarse mediante transferencia a la cuenta Monetaria del Banco Industrial <strong style="color: #035C67;">NO. 824-000676-0</strong> a nombre de <strong style="color: #035C67;">Hogares Inteligentes S.A.</strong> Posteriormente, se le entregará un recibo como confirmación una vez completada la transacción.</li>
+                    <li>Enviar una copia del contrato firmado y de la boleta de deposito al correo <strong style="color: #035C67;">ventas@onit.gt</strong></li>
+                  </ul>
+                </div>
                 <li>La instalación de los servicios pueden tardar entre <strong style="color: #035C67;">24 a 48 horas en días habiles</strong>  después de haber enviado los contratos firmados y realizado el depósito.  </li>
               </ul>
             </div>
