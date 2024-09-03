@@ -62,10 +62,21 @@ const opcionesPorTipo = [
     tipo_proyecto: 'VIAGGIO',
     torres: [
       { value: 'UNICA', label: 'UNICA' },
-     
-    
     ]
-  }
+  },
+  {
+    tipo_proyecto: 'CENTRO VIVO',
+    torres: [
+      { value: '1', label: 'Torre 1' },
+      { value: '2', label: 'Torre 2' },
+    ]
+  },
+  {
+    tipo_proyecto: 'NOVEM',
+    torres: [
+      { value: 'UNICA', label: 'UNICA' },
+    ]
+  },
 ];
 
 @Component({
@@ -84,6 +95,8 @@ export class AppComponent implements OnInit {
 
   selectedOption: string = '';
   selectedRadioButton: string = '';
+EnergiaIconColor: any;
+EnergiaIcon: any;
   
   // FormControl for each radio group
 
@@ -218,8 +231,18 @@ export class AppComponent implements OnInit {
         this.aguaIcon = "cancel";
       }
       else{
-        this.aguaIconColor = '#035C67';
-        this.aguaIcon = "task_alt";
+        if(this.selectedValue === 'CENTRO VIVO' || this.selectedValue === 'NOVEM'){
+          this.EnergiaIconColor = '#98989a';
+          this.EnergiaIcon = "cancel";
+          this.aguaIconColor = '#98989a';
+          this.aguaIcon = "cancel";
+        }else {
+          this.aguaIconColor = '#035C67';
+          this.aguaIcon = "task_alt";
+          this.EnergiaIconColor = '#035C67';
+          this.EnergiaIcon = "task_alt";
+        }
+        
       }
 
 

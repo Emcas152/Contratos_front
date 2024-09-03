@@ -352,27 +352,39 @@
                   <span>Barrio Don Bosco</span>
                 </mat-radio-button> -->
 
-               <mat-radio-button value="VILLA LUZ" style="margin-right: 20px;"> 
+               <mat-radio-button value="VILLA LUZ" style="margin-right: 10px;"> 
                   <img src="./../assets/villa1.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Villa Luz</span>
                 </mat-radio-button> 
 
-                <mat-radio-button value="GEMINIS 10" style="margin-right: 20px;"> 
+                <mat-radio-button value="GEMINIS 10" style="margin-right: 10px;"> 
                   <img src="./../assets/geminis2.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Geminis 10 </span>
                 </mat-radio-button> 
 
-                <mat-radio-button value="VIVO 4" style="margin-right: 20px;">
+                <mat-radio-button value="VIVO 4" style="margin-right: 10px;">
                   <img src="./../assets/VIVO ZONA 4.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Vivo Zona 4</span>
                 </mat-radio-button>
 
-                <mat-radio-button value="VIAGGIO">
+                <mat-radio-button value="VIAGGIO" style="margin-right: 10px;">
                   <img src="./../assets/VIAGGIO MUXBAL.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Viaggio Muxbal</span>
                 </mat-radio-button>
-          
+                
+                <mat-radio-button value="CENTRO VIVO" style="margin-right: 10px;">
+                  <img src="./../assets/CENTRO VIVO.png" alt="Image Radio Button" width="200" height="200">
+                  <span>Centro Vivo</span>
+                </mat-radio-button>
+
+                <mat-radio-button value="NOVEM" style="margin-right: 10px;">
+                  <img src="./../assets/NOVEM.png" alt="Image Radio Button" width="200" height="200">
+                  <span>NOVEM</span>
+                </mat-radio-button>
+
               </mat-radio-group>
+
+              
           
               <div class="center-radio-group">
             <!--     <button class="boton" mat-button matStepperNext>Next</button> -->
@@ -461,7 +473,7 @@
                     Telecomunicaciones
                   </mat-list-item>
                   <mat-list-item role="listitem" class="small-text" >
-                    <mat-icon style="color: #035C67;">task_alt</mat-icon>
+                    <mat-icon [style.color]="EnergiaIconColor">{{EnergiaIcon}}</mat-icon>
                     Energía Eléctrica
                   </mat-list-item>
                   <mat-list-item role="listitem" class="small-text" >
@@ -480,7 +492,7 @@
                     Telecomunicaciones
                   </mat-list-item>
                   <mat-list-item role="listitem" class="small-text" >
-                    <mat-icon style="color: #035C67;">task_alt</mat-icon>
+                    <mat-icon [style.color]="EnergiaIconColor">{{EnergiaIcon}}</mat-icon>
                     Energía Eléctrica
                   </mat-list-item>
                   <mat-list-item role="listitem" class="small-text" >
@@ -510,7 +522,7 @@
               </h3>
               <div class="separador"></div>
               <div class="checkbox-container">
-                <div *ngIf="selectedTipo !== 'RENTA'">
+                <div *ngIf="selectedTipo !== 'RENTA' && selectedValue !== 'CENTRO VIVO' && selectedValue !== 'NOVEM'">
                   <mat-checkbox labelPosition="after" class="center-radio-group" formControlName="energia">
                     <div class="checkbox-content">
                       <img src="./../assets/ICONO ENERGIA.png" alt="Imagen del checkbox" width="100" height="100">
@@ -524,7 +536,7 @@
                     <span>Telecomunicaciones</span>
                   </div>
                 </mat-checkbox>
-                <div *ngIf="selectedValue !== 'VIAGGIO' && selectedTipo !== 'RENTA' && selectedValue !== 'VILLA LUZ'">
+                <div *ngIf="selectedValue !== 'VIAGGIO' && selectedTipo !== 'RENTA' && selectedValue !== 'VILLA LUZ' && selectedValue !== 'CENTRO VIVO' && selectedValue !== 'NOVEM' ">
                   <mat-checkbox labelPosition="after" class="center-radio-group" formControlName="agua">
                     <div class="checkbox-content">
                       <img src="./../assets/ICONO AGUA.png" alt="Imagen del checkbox" width="100" height="100">
