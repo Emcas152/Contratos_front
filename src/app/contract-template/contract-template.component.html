@@ -1,0 +1,22 @@
+<div style="max-width:800px;margin:24px auto;padding:16px;">
+  <h2>Rellenar y descargar plantilla (Agua)</h2>
+
+  <form>
+    <mat-form-field style="width:100%">
+      <mat-label>Nombre del cliente</mat-label>
+      <input matInput [(ngModel)]="nombre" name="nombre">
+    </mat-form-field>
+
+    <mat-form-field style="width:100%">
+      <mat-label>Dirección</mat-label>
+      <input matInput [(ngModel)]="direccion" name="direccion">
+    </mat-form-field>
+
+    <div style="margin-top:12px;display:flex;gap:8px;">
+      <button mat-raised-button color="primary" type="button" (click)="abrirPlantilla()">Abrir plantilla</button>
+      <button mat-stroked-button color="accent" type="button" (click)="descargarPlantillaHtml()">Descargar plantilla (HTML)</button>
+    </div>
+
+    <p class="info-text">La plantilla se abrirá en una nueva pestaña con los parámetros incluidos en la URL. Si prefieres un PDF, abre la plantilla y usa "Imprimir → Guardar como PDF" o configura el backend para devolver PDF directamente.</p>
+  </form>
+</div>

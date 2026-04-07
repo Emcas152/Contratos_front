@@ -323,7 +323,7 @@
   <div fxFlex.gt-sm="100%" fxFlex="100">
     <mat-card>
       <mat-card-content>
-       <mat-card-title>Por favor, completar lo siguiente:</mat-card-title> 
+       <mat-card-title>Por favor, completar lo siguiente:</mat-card-title>
        <!--  <mat-card-subtitle
           >Check the
           <code class=""
@@ -332,35 +332,35 @@
             ></code
           >
         </mat-card-subtitle> -->
-      
+
         <mat-horizontal-stepper  #stepper>
-          
+
           <mat-step [stepControl]="firstFormGroup"  errorMessage= "Elige un edificio">
             <h3>
              Selecciona tu edificio.
             </h3>
            <div class="separador"></div>
             <form [formGroup]="firstFormGroup">
-              <mat-radio-group (change)="nextStep()" color="accent" class="center-radio-group" formControlName="tipo_proyecto" >
+              <mat-radio-group (change)="nextStep($event)" color="accent" class="center-radio-group" formControlName="tipo_proyecto" >
               <!--   <mat-radio-button  value="BARRIO 5" style="margin-right: 20px;">
                   <img src="./../assets/BARRIO 5.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Barrio 5</span>
                 </mat-radio-button> -->
-          
+
              <!--    <mat-radio-button value="BARRIO DON BOSCO" style="margin-right: 20px;">
                   <img src="./../assets/BARRIO DON BOSCO.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Barrio Don Bosco</span>
                 </mat-radio-button> -->
 
-               <mat-radio-button value="VILLA LUZ" style="margin-right: 10px;"> 
+               <mat-radio-button value="VILLA LUZ" style="margin-right: 10px;">
                   <img src="./../assets/villa1.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Villa Luz</span>
-                </mat-radio-button> 
+                </mat-radio-button>
 
-                <mat-radio-button value="GEMINIS 10" style="margin-right: 10px;"> 
+                <mat-radio-button value="GEMINIS 10" style="margin-right: 10px;">
                   <img src="./../assets/geminis2.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Geminis 10 </span>
-                </mat-radio-button> 
+                </mat-radio-button>
 
                 <mat-radio-button value="VIVO 4" style="margin-right: 10px;">
                   <img src="./../assets/VIVO ZONA 4.jpg" alt="Image Radio Button" width="200" height="200">
@@ -371,7 +371,7 @@
                   <img src="./../assets/VIAGGIO MUXBAL.jpg" alt="Image Radio Button" width="200" height="200">
                   <span>Viaggio Muxbal</span>
                 </mat-radio-button>
-                
+
                 <mat-radio-button value="CENTRO VIVO" style="margin-right: 10px;">
                   <img src="./../assets/CENTRO VIVO.png" alt="Image Radio Button" width="200" height="200">
                   <span>Centro Vivo</span>
@@ -382,10 +382,15 @@
                   <span>NOVEM</span>
                 </mat-radio-button>
 
+                <mat-radio-button value="CANADAS" style="margin-right: 10px;">
+                  <img src="./../assets/canadas.jpg" alt="Image Radio Button" width="200" height="200">
+                  <span>Cañadas de las charcas</span>
+                </mat-radio-button>
+
               </mat-radio-group>
 
-              
-          
+
+
               <div class="center-radio-group">
             <!--     <button class="boton" mat-button matStepperNext>Next</button> -->
               </div>
@@ -395,7 +400,7 @@
 
           <mat-step [stepControl]="secondFormGroup"  errorMessage="Completa lo solicitado">
             <form [formGroup]="secondFormGroup">
-             
+
               <h3>
                 ¿ En qué torre te encuentras?
               </h3>
@@ -405,24 +410,24 @@
                   <img src="./../assets/ICONO TORRE ÚNICA.png" alt="Image Radio Button" width="200" height="200">
                   <span>Torre 1</span>
                 </mat-radio-button>
-      
+
                 <mat-radio-button value="2">
                   <img src="./../assets/ICONO TORRE.png" alt="Image Radio Button" width="200" height="200">
                   <span>Torre 2</span>
                 </mat-radio-button>
-              
+
               </mat-radio-group> -->
-              <mat-form-field appearance="fill" class="centered-select custom-select" formControlName="torre">
+              <mat-form-field appearance="fill" class="centered-select custom-select">
                 <mat-label>Selecciona una torre</mat-label>
-                <mat-select [ngModel]="selectedValue" formControlName="torre" [disabled]="torreSelect">
+                <mat-select formControlName="torre">
                   <mat-option *ngFor="let torre of torresOptions" [value]="torre.value" [disabled]="torreSelect && torre.value !== 'UNICA'">{{ torre.label }}</mat-option>
-             
+
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="col centered-select">
                 <input matInput placeholder="No. Apartamento u Oficina" formControlName="numero_apartamento">
               </mat-form-field>
-              
+
               <div class="d-flex justify-content-between">
                 <button class="mat-stroked-button"  style="margin-right: 20px;" mat-button matStepperPrevious>
                   <mat-icon>keyboard_arrow_left</mat-icon>
@@ -436,129 +441,10 @@
             </form>
           </mat-step>
 
-          
-          <mat-step [stepControl]="thirdFormGroup" *ngIf="isBuildingSelected()" errorMessage="Elige una opción"><!-- 
-            <ng-template matStepLabel>Tipo de Contratante</ng-template> -->
-            <form [formGroup]="thirdFormGroup">
-            <h3>
-              ¿ Qué tipo de contratante eres ?
-            </h3>
-            <div class="separador"></div>
-            <mat-radio-group class="center-radio-group"  (change)="nextStep()" formControlName="tipo_apartamento">
-              <mat-radio-button value="RENTA"  style="margin-right: 20px;" class="separador-img">
-                <img src="./../assets/ICONO RENTA.png" alt="Image Radio Button" width="200" height="200">
-                <span>Renta</span>
-                <mat-list role="list" >
-                <mat-list-item role="listitem" class="small-text" >
-                  <mat-icon style="color: #035C67;" class="check" >task_alt</mat-icon>
-                    Telecomunicaciones
-                </mat-list-item>
-                <mat-list-item role="listitem" class="small-text" >
-                  <mat-icon style="color: #98989a;">cancel</mat-icon>
-                  Energía Eléctrica
-                </mat-list-item>
-                <mat-list-item role="listitem" class="small-text" >
-                  <mat-icon style="color: #98989a;">cancel</mat-icon>
-                  Agua
-                </mat-list-item>
-              </mat-list>
-              </mat-radio-button>
-    
-              <mat-radio-button value="RENTA CON OPCION DE COMPRA" style="margin-right: 20px;" class="separador-img">
-                <img src="./../assets/ICONO RENTA-COMPRA.png" alt="Image Radio Button" width="150" height="150">
-                <span>Renta-Compra</span>
-                <mat-list role="list" >
-                  <mat-list-item role="listitem" class="small-text" >
-                    <mat-icon style="color: #035C67;">task_alt</mat-icon>
-                    Telecomunicaciones
-                  </mat-list-item>
-                  <mat-list-item role="listitem" class="small-text" >
-                    <mat-icon [style.color]="EnergiaIconColor">{{EnergiaIcon}}</mat-icon>
-                    Energía Eléctrica
-                  </mat-list-item>
-                  <mat-list-item role="listitem" class="small-text" >
-                    <mat-icon [style.color]="aguaIconColor">{{aguaIcon}}</mat-icon>
-                    Agua
-                  </mat-list-item>
-                </mat-list>
-              </mat-radio-button>
 
-              <mat-radio-button value="PROPIETARIO">
-                <img src="./../assets/ICONO PROPIETARIO.png" alt="Image Radio Button" width="200" height="200">
-                <span>Propietario</span>
-                <mat-list role="list" >
-                  <mat-list-item role="listitem" class="small-text" >
-                    <mat-icon style="color: #035C67;">task_alt</mat-icon>
-                    Telecomunicaciones
-                  </mat-list-item>
-                  <mat-list-item role="listitem" class="small-text" >
-                    <mat-icon [style.color]="EnergiaIconColor">{{EnergiaIcon}}</mat-icon>
-                    Energía Eléctrica
-                  </mat-list-item>
-                  <mat-list-item role="listitem" class="small-text" >
-                    <mat-icon [style.color]="aguaIconColor">{{aguaIcon}}</mat-icon>
-                    Agua
-                  </mat-list-item>
-                </mat-list>
-              </mat-radio-button>
-            </mat-radio-group>
-            <h4></h4>
-            <div>
-              <button class="mat-stroked-button" mat-button matStepperPrevious>
-                <mat-icon>keyboard_arrow_left</mat-icon>
-              Volver
-              </button>
-          <!--     <button class="boton" mat-button matStepperNext>Next</button> -->
-            <!--   <button mat-button (click)="stepper.reset()">Reset</button> -->
-            </div>
-          </form>
-          </mat-step>
+          <!-- Paso de selección de servicios eliminado; los pasos de telecom y agua se muestran directamente -->
 
-
-          <mat-step [stepControl]="fourthFormGroup"   *ngIf="isContractTypeSelected()" [completed]="isServiceSelected()">
-            <form [formGroup]="fourthFormGroup">
-              <h3>
-                ¿ Qué servicios necesitas ?
-              </h3>
-              <div class="separador"></div>
-              <div class="checkbox-container">
-                <div *ngIf="selectedTipo !== 'RENTA' && selectedValue !== 'CENTRO VIVO' && selectedValue !== 'NOVEM'">
-                  <mat-checkbox labelPosition="after" class="center-radio-group" formControlName="energia">
-                    <div class="checkbox-content">
-                      <img src="./../assets/ICONO ENERGIA.png" alt="Imagen del checkbox" width="100" height="100">
-                      <span>Energia</span>
-                    </div>
-                  </mat-checkbox>
-                </div>
-                <mat-checkbox labelPosition="after" class="center-radio-group" formControlName="internet">
-                  <div class="checkbox-content">
-                    <img src="./../assets/ICONO INTERNET.png" alt="Imagen del checkbox" width="110" height="100">
-                    <span>Telecomunicaciones</span>
-                  </div>
-                </mat-checkbox>
-                <div *ngIf="selectedValue !== 'VIAGGIO' && selectedTipo !== 'RENTA' && selectedValue !== 'VILLA LUZ' && selectedValue !== 'CENTRO VIVO' && selectedValue !== 'NOVEM' ">
-                  <mat-checkbox labelPosition="after" class="center-radio-group" formControlName="agua">
-                    <div class="checkbox-content">
-                      <img src="./../assets/ICONO AGUA.png" alt="Imagen del checkbox" width="100" height="100">
-                      <span>Transporte de Agua</span>
-                    </div>
-                  </mat-checkbox>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <button class="mat-stroked-button"  style="margin-right: 20px;" mat-button matStepperPrevious>
-                  <mat-icon>keyboard_arrow_left</mat-icon>
-                  Volver
-                </button>
-                <button mat-button matStepperNext class="align-self-end float-right mat-stroked-button">
-                  <mat-icon>keyboard_arrow_right</mat-icon>
-                  Siguiente
-                </button>
-              </div>
-            </form>
-          </mat-step>
-          
-          <mat-step [stepControl]="formServicio" *ngIf="fourthFormGroup?.get('internet')?.value">
+          <mat-step [stepControl]="formServicio" *ngIf="isBuildingSelected()">
             <ng-template matStepLabel></ng-template>
             <form [formGroup]="formServicio" >
               <ng-template matStepLabel></ng-template>
@@ -567,149 +453,37 @@
               </div>
               <mat-radio-group formControlName="tipo_servicio" class="visible">
                 <div class="options-container">
-                  <!-- Opción Simétrico -->
-                  <div class="option">
-                    <mat-radio-button value="simetrico" class="radio-option"  [disabled]="true">
-                      <img src="../assets/SIMÉTRICO.svg" alt="Simétrico" class="option-image"/>
-                      <div class="option-label">Simétrico</div>
-                    </mat-radio-button>
-                    <table class="table">
-                      <mat-radio-group formControlName="tabla1" class="visible" >
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="20"  (change)="onRadioGroupChange('simetrico','20','tabla1')"></mat-radio-button>
-                          </td>
-                          <td>20 Mbps</td>
-                          <td>$. 90.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="30" (change)="onRadioGroupChange('simetrico','30','tabla1')"></mat-radio-button>
-                          </td>
-                          <td>30 Mbps</td>
-                          <td>$. 110.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="50" (change)="onRadioGroupChange('simetrico','50','tabla1')"></mat-radio-button>
-                          </td>
-                          <td>50 Mbps</td>
-                          <td>$. 130.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="100"  (change)="onRadioGroupChange('simetrico','100','tabla1')"></mat-radio-button>
-                          </td>
-                          <td>100 Mbps</td>
-                          <td>$. 250.00</td>
-                        </tr>
-                      </mat-radio-group>
-                    </table>
-                    <p class="info-text">Ejemplo: Al adquirir un plan de 30 MB,<br>
-                       tendrás la misma cantidad<br>tanto para la descarga <br>
-                       como para la carga de datos.</p>
-                  </div>
-                  <!-- Opción FTTH PLUS -->
-                  <div class="option">
-                    <mat-radio-button value="burst" class="radio-option"  [disabled]="true">
-                      <img src="../assets/FTTH PLUS.svg" alt="FTTH PLUS" class="option-image"/>
-                      <div class="option-label">FTTH PLUS</div>
-                    </mat-radio-button>
-                    <table class="table">
-                      <mat-radio-group formControlName="tabla2" class="visible" >
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="30"  (change)="onRadioGroupChange('burst','30','tabla2')"></mat-radio-button>
-                          </td>
-                          <td>30 Mbps</td>
-                          <td>Q. 299.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="50" (change)="onRadioGroupChange('burst','50','tabla2')"></mat-radio-button>
-                          </td>
-                          <td>50 Mbps</td>
-                          <td>Q. 349.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="100" (change)="onRadioGroupChange('burst','100','tabla2')"></mat-radio-button>
-                          </td>
-                          <td>100 Mbps</td>
-                          <td>Q. 429.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="200" (change)="onRadioGroupChange('burst','200','tabla2')" ></mat-radio-button>
-                          </td>
-                          <td>200 Mbps</td>
-                          <td>Q. 599.00</td>
-                        </tr>
-                      </mat-radio-group>
-                    </table>
-                    <p class="info-text">*Ejemplo: Al adquirir<br> un plan de 30 MB<br>
-                      , tendrás 30 MB para la descarga<br>
-                      y un 30% en la carga.</p>
-                  </div>
-                  <!-- Opción Básico -->
-                  <div class="option">
-                    <mat-radio-button value="basico" class="radio-option" [disabled]="true" >
-                      <img src="../assets/BÁSICO.svg" alt="Básico" class="option-image"/>
-                      <div class="option-label">Básico</div>
-                    </mat-radio-button>
-                    <table class="table">
-                      <mat-radio-group formControlName="tabla0" class="visible" >
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="30" (change)="onRadioGroupChange('basico','30','tabla0')"></mat-radio-button>
-                          </td>
-                          <td>50 Mbps</td>
-                          <td>Q. 199.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="50" (change)="onRadioGroupChange('basico','50','tabla0')"></mat-radio-button>
-                          </td>
-                          <td>75 Mbps</td>
-                          <td>Q. 249.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="100" (change)="onRadioGroupChange('basico','100','tabla0')"></mat-radio-button>
-                          </td>
-                          <td>150 Mbps</td>
-                          <td>Q. 329.00</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <mat-radio-button class="mr-1" value="200" (change)="onRadioGroupChange('basico','200','tabla0')"></mat-radio-button>
-                          </td>
-                          <td>250 Mbps</td>
-                          <td>Q. 529.00</td>
-                        </tr>
-                      </mat-radio-group>
-                    </table>
-                    <p class="info-text">*Ejemplo: Al adquirir un plan<br>
-                      de 50 MB, tendrás 50 MB para la<br>
-                      descarga y un 10% en la carga.</p>
-                   
-                  </div>
+                  <ng-container *ngFor="let plan of listPlans">
+                    <div class="option">
+                      <mat-radio-button [value]="plan.code" class="radio-option" [disabled]="plan.disabled">
+                        <img [src]="plan.image" alt="{{ plan.name }}" class="option-image"/>
+                        <div class="option-label">{{ plan.name }}</div>
+                      </mat-radio-button>
+                      <table class="table">
+                        <mat-radio-group [formControl]="getControl(plan.controlName)" class="visible">
+                          <tr *ngFor="let opt of plan.options">
+                            <td>
+                              <mat-radio-button class="mr-1" [value]="opt.value" (change)="onRadioGroupChange(plan.code, opt.value, plan.controlName)"></mat-radio-button>
+                            </td>
+                            <td>{{ opt.label }}</td>
+                            <td>{{ opt.price }}</td>
+                          </tr>
+                        </mat-radio-group>
+                      </table>
+                      <p class="info-text" *ngIf="plan.description">{{ plan.description }}</p>
+                    </div>
+                  </ng-container>
                 </div>
               </mat-radio-group>
-              
-              
-              
-              
-                <div class="separador"></div>
-            
-          
+
               <div class="separador"></div>
               <div class="separador"></div>
               <div class="separador"></div>
-              
-              
+              <div class="separador"></div>
+
+
               <div class="d-flex flex-column justify-content-center align-items-baseline facturacion-title">
-            
+
               </div>
 
 
@@ -745,7 +519,7 @@
                         </tr>
                       </mat-radio-group>
                     </table>
-                   
+
                   </div>
                   <div class="separador"></div>
                   <div style="text-align: center;">
@@ -754,8 +528,8 @@
                   </div>
                 </div>
               </div>
-              
-              
+
+
               <div class="separador"></div>
               <div class="d-flex justify-content-between">
                 <button class="mat-stroked-button"  style="margin-right: 20px;" mat-button matStepperPrevious>
@@ -767,181 +541,13 @@
                   Siguiente
                 </button>
               </div>
-             
+
             </form>
           </mat-step>
-          <!-- empieza el nuevo  -->
-
-          
-          <div class="options-container">
-            <!-- Opción Por Consumo -->
-            <div class="option">
-              <mat-radio-button value="simetrico" class="radio-option">
-                <img src="../assets/SIMÉTRICO.svg" alt="Por Consumo" class="option-image"/>
-                <div class="option-label">Simetrico</div>
-              </mat-radio-button>
-              
-              <table class="table">
-                
-              <mat-radio-group  class="visible" formControlName="tabla1">
-                <!-- <tr>
-                  <td>
-                    <mat-radio-button class="mr-1" value="10"></mat-radio-button>
-                  </td>
-                  <td>10 Mbps</td>
-                  <td>Q. 239.00</td>
-                </tr> -->
-                <tr>
-                  <td>
-                    <mat-radio-button class="mr-1" value="20"></mat-radio-button>
-                  </td>
-                  <td>20 Mbps</td>
-                  <td>$. 90.00</td>
-                </tr>
-                <tr>
-                  <td>
-                    <mat-radio-button class="mr-1" value="30"></mat-radio-button>
-                  </td>
-                  <td>30 Mbps</td>
-                  <td>$. 110.00</td>
-                </tr>
-                <tr>
-                  <td>
-                    <mat-radio-button class="mr-1" value="50"></mat-radio-button>
-                  </td>
-                  <td>50 Mbps</td>
-                  <td>$. 130.00</td>
-                </tr>
-                <tr>
-                  <td>
-                    <mat-radio-button class="mr-1" value="100"></mat-radio-button>
-                  </td>
-                  <td>100 Mbps</td>
-                  <td>$. 250.00</td>
-                </tr>
-                </mat-radio-group>
-              </table>
-              
-            </div>
-      
-            <!-- Opción Media Paja de Agua -->
-            <div class="option">
-              <mat-radio-button value="opcion2" class="radio-option">
-                <img src="../assets/ICONO AGUA CONSUMO.png" alt="Media Paja de Agua" class="option-image"/>
-                <div class="option-label">Media Paja de Agua</div>
-              </mat-radio-button>
-             
-                <table class="tables">
-                  <tr>
-                    <td></td>
-                    <td style="font-weight: bold; color: #035C67;">Cargo Fijo:</td>
-                    <td>Q. 150.00</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> Incluidos:</td>
-                    <td>30 mt<sup>3</sup> mensuales</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> por consumo:</td>
-                    <td>Q. 11.50</td>
-                  </tr>
-                </table>
-              
-            </div>
-          </div>
-
-
-
           <!-- aqui empieza el agua -->
-       <mat-step [stepControl]="formServicioAgua" *ngIf="fourthFormGroup?.get('agua')?.value">
-  <ng-template matStepLabel></ng-template>
-  <form [formGroup]="formServicioAgua">
-    <div class="separador"></div>
-    <div class="row">
-      <div class="columna">
-        <h3>Elige un plan para transporte de agua residencial </h3>
-        <br>
-        
-      </div>
-      
+          <!-- Paso de agua eliminado -->
 
-    </div>
-    <div class="separador"></div>
 
-    <mat-radio-group class="visible" formControlName="servicio_agua">
-      <div class="options-container">
-        <!-- Opción Por Consumo -->
-        <div class="option">
-          <mat-radio-button value="opcion1" class="radio-option">
-            <img src="../assets/ICONO AGUA CONSUMO.png" alt="Por Consumo" class="option-image"/>
-            <div class="option-label">Por Consumo</div>
-          </mat-radio-button>
-
-          <table class="tables">
-            <tr>
-              
-              <td style="font-weight: bold; color: #035C67;">Cargo Fijo:</td>
-              <td>Q. 50.00</td>
-            </tr>
-            <tr>
-              
-              <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> Incluidos:</td>
-              <td>0 mt<sup>3</sup> mensuales</td>
-            </tr>
-            <tr>
-             
-              <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> por consumo:</td>
-              <td>Q. 7.50</td>
-            </tr>
-          </table>
-        </div>
-
-        <!-- Opción Media Paja de Agua -->
-        <div class="option">
-          <mat-radio-button value="opcion2" class="radio-option">
-            <img src="../assets/ICONO AGUA CONSUMO.png" alt="Media Paja de Agua" class="option-image"/>
-            <div class="option-label">Media Paja de Agua</div>
-          </mat-radio-button>
-
-          <table class="tables">
-            <tr>
-              
-              <td style="font-weight: bold; color: #035C67;">Cargo Fijo:</td>
-              <td>Q. 150.00</td>
-            </tr>
-            <tr>
-              
-              <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> Incluidos:</td>
-              <td>30 mt<sup>3</sup> mensuales</td>
-            </tr>
-            <tr>
-              
-              <td style="font-weight: bold; color: #035C67;">mt<sup>3</sup> por consumo:</td>
-              <td>Q. 11.50</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </mat-radio-group>
-
-    <div class="separador"></div>
-
-    <div class="d-flex justify-content-between">
-      <button class="mat-stroked-button" style="margin-right: 20px;" mat-button matStepperPrevious>
-        <mat-icon>keyboard_arrow_left</mat-icon>
-        Volver
-      </button>
-      <button mat-button matStepperNext class="align-self-end float-right mat-stroked-button">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Siguiente
-      </button>
-    </div>
-  </form>
-</mat-step>
-
-          
 
           <!-- aquiterminaelagua -->
 
@@ -949,19 +555,19 @@
 
           <div class="row">
             <div class="col">
-              <mat-step [stepControl]="formSolicitante" *ngIf="isServiceSelected()">
+              <mat-step [stepControl]="formSolicitante" *ngIf="isBuildingSelected()">
             <form [formGroup]="formSolicitante">
               <ng-template matStepLabel></ng-template>
               <h3 class="facturacion-title">Datos del Solicitante</h3>
               <div class="row">
-                
+
                 <mat-form-field class="col">
                   <input matInput placeholder="Escriba Nombre Completo" formControlName="nombre">
                 </mat-form-field>
                 <mat-form-field class="col">
                   <input matInput placeholder="Escriba Correo Electrónico" formControlName="email">
                 </mat-form-field>
-    
+
                 <mat-form-field class="col">
                   <mat-label>Seleccione Sexo</mat-label>
                   <mat-select placeholder="Seleccione Sexo" formControlName="sexo">
@@ -972,7 +578,7 @@
                     </ng-container>
                   </mat-select>
                 </mat-form-field>
-    
+
                 <mat-form-field class="col">
                   <mat-label>Seleccione Nacionalidad</mat-label>
                   <mat-select placeholder="Seleccione Nacionalidad" formControlName="nacionalidad">
@@ -983,7 +589,7 @@
                     </ng-container>
                   </mat-select>
                 </mat-form-field>
-    
+
                 <mat-form-field class="col">
                   <mat-label>Seleccione Tipo Documento</mat-label>
                   <mat-select placeholder="Seleccione Tipo Documento" formControlName="tipo_documento">
@@ -994,11 +600,11 @@
                     </ng-container>
                   </mat-select>
                 </mat-form-field>
-    
+
                 <mat-form-field class="col">
                   <input matInput placeholder="Escriba No. Identificación" formControlName="identificacion">
                 </mat-form-field>
-    
+
                 <mat-form-field class="col">
                   <input matInput placeholder="Escriba su Edad (Años)" formControlName="edad">
                 </mat-form-field>
@@ -1018,7 +624,7 @@
                     </ng-container>
                   </mat-select>
                 </mat-form-field>
-    
+
                 <mat-form-field class="col">
                   <mat-label>Fecha Traslado</mat-label>
                   <input
@@ -1034,7 +640,7 @@
                   <mat-datepicker #pickerFecha></mat-datepicker>
                 </mat-form-field>
 
-                
+
               </div>
               <ng-container >
                 <h3 class="facturacion-title">Datos de facturación</h3>
@@ -1046,12 +652,12 @@
                     <mat-form-field class="col">
                       <input matInput placeholder="Nit" formControlName="nit_factura">
                     </mat-form-field>
-                   
+
                   </div>
                 </form>
               </ng-container>
               <div class="d-flex justify-content-between">
-          
+
                 <div class="separador"></div>
                 <button class="mat-stroked-button" style="margin-right: 20px;" mat-button matStepperPrevious>
                   <mat-icon>keyboard_arrow_left</mat-icon>
@@ -1062,7 +668,7 @@
                   Siguiente
                 </button>
               </div>
-             
+
             </form>
           </mat-step>
 
@@ -1086,7 +692,7 @@
         <li>Enviar una copia del contrato firmado y de la boleta de deposito al correo <strong style="color: #035C67;">ventas@onit.gt</strong></li>
       </ul>
     </div>
-                
+
               </ul>
             </div>
             <div class="separador"></div>
@@ -1098,14 +704,14 @@
             </div>
             <div class="botones-container d-flex flex-lg-row flex-column align-items-center my-2 my-lg-3 gap-2 gap-lg-3">
               <button mat-button class="mat-stroked-button" (click)="generarPDF()" [disabled]="formFinal.invalid">Descargar y enviar por correo</button>
-              
+
             </div>
           </form>
           </mat-step>
           <mat-step *ngIf="pdfGenerated">
             <h3 class="facturacion-title">Recordatorio</h3>
             <div class="row">
-             
+
             </div>
             <div class="separador"></div>
             <div style="text-align: center;">
@@ -1126,20 +732,19 @@
                 <mat-icon>wifi</mat-icon>
                 <span>Telecomunicaciones</span>
               </a>
-            
-              <a mat-raised-button [href]="this.pdfUrlAgua"  *ngIf="this.pdfUrlAgua !== ''" target="_blank" style="background-color: #035C67; color: white;"  class="button">
-                <mat-icon>water_drop</mat-icon>
-                <span>Trasporte de Agua</span>
-              </a>
-            
+              <!-- Enlace de agua eliminado -->
               <a mat-raised-button [href]="this.pdfUrlEnergia" *ngIf="this.pdfUrlEnergia !== ''" target="_blank" style="background-color: #035C67; color: white;" class="button">
                 <mat-icon>tips_and_updates</mat-icon>
                 <span>Energía</span>
               </a>
+              <button mat-stroked-button color="primary" (click)="reenviarContrato()" style="margin-left: 16px;">
+                <mat-icon>mail</mat-icon>
+                Reenviar contrato al correo
+              </button>
             </div>
-            
+
           </mat-step>
-          
+
 
         </div></div>
         </mat-horizontal-stepper>

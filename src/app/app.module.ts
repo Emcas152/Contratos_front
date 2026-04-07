@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { ContractTemplateComponent } from './contract-template/contract-template.component';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from "@angular/material/icon";
 import {MatStepperModule} from '@angular/material/stepper';
@@ -26,7 +28,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ContractTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
     FormsModule,
     MatButtonToggleModule,
     MatGridListModule
-   
+    ,
+    RouterModule.forRoot([
+      { path: 'plantilla', component: ContractTemplateComponent }
+    ])
 
    
   ],
